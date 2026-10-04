@@ -18,9 +18,8 @@ MODEL_ID = "gemma-4-31b-it"
 def call_gemma(prompt, max_tokens=4096):
     """Call Gemma model via Google AI API with retry and fallback."""
     models_to_try = [
-        "gemma-4-31b-it", 
-        "gemma-4-26b-a4b-it",
-        "gemini-1.5-flash" # Fallback
+        "gemini-1.5-flash", # Fast model for snappy demo and screenshots
+        "gemma-4-26b-a4b-it"
     ]
     
     last_error = None
