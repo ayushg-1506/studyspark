@@ -19,7 +19,7 @@ StudySpark is a sleek, AI-powered study assistant built for students who struggl
 
 ## 📸 Screenshots
 
-*(Add your awesome screenshots here! Just drag and drop them into the GitHub editor)*
+![StudySpark Home](screenshot.png)
 
 ## 🛠️ How to Run Locally
 
