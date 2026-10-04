@@ -1,80 +1,57 @@
-# ⚡ StudySpark — AI Study Buddy
+# ⚡ StudySpark
 
-> **Built for Hacktoberfest 2026 Weekend Challenge: Build for a Friend**
+> Transform your chaotic lecture notes into working study materials instantly.
 
-StudySpark turns your messy notes into flashcards, quizzes, and summaries — powered by **Gemma**, Google's open-weight AI model. Your notes stay private. Always.
-
-![Python](https://img.shields.io/badge/Python-3.10+-blue?style=flat-square)
-![Flask](https://img.shields.io/badge/Flask-3.1-green?style=flat-square)
-![Gemma](https://img.shields.io/badge/AI-Gemma%203-purple?style=flat-square)
-![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
+StudySpark is a sleek, AI-powered study assistant built for students who struggle to organize their textbook excerpts and lecture notes. By leveraging **Google's Gemma open-weight models** (via the Gemini API), it processes your notes to ensure private, secure, and fast learning.
 
 ## ✨ Features
 
-- 📇 **Smart Flashcards** — AI-generated cards that test understanding, not just memorization
-- 🧠 **Adaptive Quizzes** — Multiple-choice questions with explanations
-- 📋 **Key Summaries** — Organized summaries with key terms and concept connections
-- 💡 **Concept Explainer** — Stuck on something? Get simple, friendly explanations
-- 🔒 **Privacy First** — Notes are processed per-session, never stored permanently
-- ⌨️ **Keyboard Shortcuts** — Arrow keys to navigate, Space to flip, 1/2/3 to rate
+- **Smart Flashcards**: Automatically extracts key concepts from your notes and converts them into an interactive flashcard deck with spaced repetition marking.
+- **Adaptive Quizzes**: Generates multiple-choice quizzes to test your comprehension on the fly.
+- **Key Summaries**: Condenses walls of text into bulleted highlights and extracts key terms for quick review.
+- **Concept Explainer**: Stuck on a specific topic? Type it in, and StudySpark will break it down with analogies, real-world examples, and study tips.
 
-## 🚀 Quick Start
+## 🚀 Built With
 
-### Prerequisites
-- Python 3.10+
-- A [Google AI Studio API key](https://aistudio.google.com/apikey) (free)
+- **Backend**: Python, Flask, Gunicorn
+- **Frontend**: Vanilla JS, Custom CSS (Minimalist Design System)
+- **AI**: Google Gemini API (`gemini-1.5-flash` for blazing fast generation / `gemma-4` architecture)
 
-### Setup
+## 📸 Screenshots
 
-```bash
-# Clone the repo
-git clone https://github.com/ayushg-1506/studyspark.git
-cd studyspark
+*(Add your awesome screenshots here! Just drag and drop them into the GitHub editor)*
 
-# Create virtual environment
-python3 -m venv venv
-source venv/bin/activate
+## 🛠️ How to Run Locally
 
-# Install dependencies
-pip install -r requirements.txt
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/ayushg-1506/studyspark.git
+   cd studyspark
+   ```
 
-# Set up environment
-cp .env.example .env
-# Edit .env and add your GEMINI_API_KEY
+2. **Set up a virtual environment**
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
 
-# Run!
-python app.py
-```
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Open [http://localhost:5000](http://localhost:5000) and start studying! ⚡
+4. **Add your API Key**
+   Create a `.env` file in the root directory and add your Google AI Studio API key:
+   ```env
+   GEMINI_API_KEY=your_api_key_here
+   ```
 
-## 🏗️ Architecture
+5. **Run the App**
+   ```bash
+   python app.py
+   ```
+   Open `http://localhost:5000` in your browser.
 
-```
-StudySpark
-├── app.py                 # Flask backend + Gemma API integration
-├── templates/
-│   └── index.html         # Single-page application
-├── static/
-│   ├── css/style.css      # Dark neon design system
-│   └── js/app.js          # Frontend logic + state management
-├── requirements.txt       # Python dependencies
-└── .env                   # API key (not committed)
-```
-
-## 🤖 AI Model
-
-StudySpark uses **Gemma 3 27B IT** — Google's open-weight language model — via the Google AI Studio API. Gemma is:
-- **Open-weight**: Full model weights are publicly available
-- **Privacy-friendly**: Can be run locally for complete data privacy
-- **Free**: Google AI Studio provides free API access
-- **Capable**: 27B parameters for high-quality study material generation
-
-## 📄 License
-
-MIT License — see [LICENSE](LICENSE) for details.
-
-## 🎃 Hacktoberfest 2026
-
-This project was built for the **Hacktoberfest Weekend Challenge: Build for a Friend**.
-Built with ❤️ to help friends study smarter, not harder.
+## 🏆 Hacktoberfest 2026 - DEV Challenge
+This project was built for the **Hacktoberfest "Build for a Friend" DEV Challenge**. 
+- **Target Categories**: Best Use of Gemma & Best Use of Render.
