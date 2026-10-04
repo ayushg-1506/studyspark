@@ -156,12 +156,12 @@ function renderFlashcard() {
     const empty = document.getElementById('flashcards-empty');
     
     if (flashcards.length === 0) {
-        empty.classList.remove('hidden');
+        if (empty) empty.classList.remove('hidden');
         controls.classList.add('hidden');
         return;
     }
     
-    empty.classList.add('hidden');
+    if (empty) empty.classList.add('hidden');
     controls.classList.remove('hidden');
     
     const card = flashcards[currentCardIndex];
@@ -266,12 +266,12 @@ function renderQuiz() {
     const results = document.getElementById('quiz-results');
     
     if (quizData.length === 0) {
-        empty.classList.remove('hidden');
+        if (empty) empty.classList.remove('hidden');
         results.classList.add('hidden');
         return;
     }
     
-    empty.classList.add('hidden');
+    if (empty) empty.classList.add('hidden');
     results.classList.add('hidden');
     
     let html = '';
@@ -407,7 +407,7 @@ function renderSummary(summary) {
     const container = document.getElementById('summary-container');
     const empty = document.getElementById('summary-empty');
     
-    empty.classList.add('hidden');
+    if (empty) empty.classList.add('hidden');
     
     let html = `<div class="summary-content">`;
     html += `<h2 class="summary-title">${escapeHtml(summary.title)}</h2>`;
