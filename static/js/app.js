@@ -15,7 +15,7 @@ let streak = parseInt(localStorage.getItem('studyspark_streak') || '0');
 
 // ---- Init ----
 document.addEventListener('DOMContentLoaded', () => {
-    initParticles();
+    
     initNavigation();
     updateStats();
     
@@ -79,7 +79,7 @@ function navigateTo(sectionId) {
 
 // ---- Stats ----
 function updateStats() {
-    document.getElementById('streak-count').textContent = streak;
+    
     document.getElementById('cards-studied').textContent = cardsStudied;
 }
 
@@ -220,8 +220,6 @@ function markCard(difficulty) {
     } else {
         showToast('🎉 You finished all cards! Great job!', 'success');
         // Update streak
-        streak++;
-        localStorage.setItem('studyspark_streak', streak);
         updateStats();
     }
 }
@@ -365,8 +363,6 @@ function submitQuiz() {
     
     // Update streak on good scores
     if (score >= 60) {
-        streak++;
-        localStorage.setItem('studyspark_streak', streak);
         updateStats();
     }
     
