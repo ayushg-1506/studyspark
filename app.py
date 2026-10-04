@@ -16,20 +16,32 @@ MODEL_ID = "gemma-4-31b-it"
 
 
 def call_gemma(prompt, max_tokens=4096):
-    """Call Gemma model via Google AI API."""
-    try:
-        response = client.models.generate_content(
-            model=MODEL_ID,
-            contents=prompt,
-            config={
-                "temperature": 0.7,
-                "max_output_tokens": max_tokens,
-            }
-        )
-        return response.text
-    except Exception as e:
-        print(f"Error calling Gemma: {e}")
-        raise e
+    """Call Gemma model via Google AI API with retry and fallback."""
+    models_to_try = [
+        "gemma-4-31b-it", 
+        "gemma-4-26b-a4b-it",
+        "gemini-1.5-flash" # Fallback
+    ]
+    
+    last_error = None
+    for model in models_to_try:
+        try:
+            print(f"Attempting generation with {model}...")
+            response = client.models.generate_content(
+                model=model,
+                contents=prompt,
+                config={
+                    "temperature": 0.7,
+                    "max_output_tokens": max_tokens,
+                }
+            )
+            return response.text
+        except Exception as e:
+            print(f"Error calling {model}: {e}")
+            last_error = e
+            continue
+            
+    raise last_error
 
 
 def parse_json_response(text):
