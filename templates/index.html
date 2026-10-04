@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudySpark</title>
+    <meta name="description" content="Turn simple prompts into working knowledge.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="page-background"></div>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <div class="brand-icon">S</div>
+            StudySpark
+        </div>
+        <div class="nav-links">
+            <a href="#" class="nav-link active" data-section="home" id="nav-home">Home</a>
+            <a href="#" class="nav-link" data-section="flashcards" id="nav-flashcards">Flashcards</a>
+            <a href="#" class="nav-link" data-section="quiz" id="nav-quiz">Quiz</a>
+            <a href="#" class="nav-link" data-section="summary" id="nav-summary">Summary</a>
+            <a href="#" class="nav-link" data-section="explain" id="nav-explain">Explain</a>
+        </div>
+        <div class="nav-actions">
+            <div class="stat-badge"><span id="cards-studied">0</span> cards studied</div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- HOME SECTION -->
+        <section class="section active" id="section-home">
+            <div class="hero">
+                <div class="hero-badge">BUILT WITH GEMMA AI</div>
+                <h1 class="hero-title">Bring every note<br>into focus</h1>
+                <p class="hero-subtitle">
+                    StudySpark turns your study materials into working flashcards, quizzes, and summaries — complete with smart tracking and concept explanations.
+                </p>
+            </div>
+
+            <div class="input-container">
+                <textarea 
+                    class="notes-textarea" 
+                    id="notes-input" 
+                    placeholder="Paste your lecture notes, textbook excerpts, or study material here..."
+                ></textarea>
+                <div class="input-actions-bar">
+                    <div class="char-count" id="char-count">0 characters</div>
+                    <div class="actions">
+                        <button class="btn btn-primary" id="btn-flashcards" onclick="generateFlashcards()">Generate Flashcards</button>
+                        <button class="btn btn-secondary" id="btn-quiz" onclick="generateQuiz()">Create Quiz</button>
+                        <button class="btn btn-secondary" id="btn-summary" onclick="generateSummary()">Summarize</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features-row">
+                <div class="feature-item" onclick="navigateTo('flashcards')">Smart Flashcards</div>
+                <div class="feature-item" onclick="navigateTo('quiz')">Adaptive Quizzes</div>
+                <div class="feature-item" onclick="navigateTo('summary')">Key Summaries</div>
+                <div class="feature-item" onclick="navigateTo('explain')">Concept Explainer</div>
+            </div>
+        </section>
+
+        <!-- FLASHCARDS SECTION -->
+        <section class="section" id="section-flashcards">
+            <div class="section-header">
+                <h2 class="section-title">Flashcards</h2>
+                <p class="section-subtitle">Test your understanding</p>
+            </div>
+            
+            <div class="flashcards-container" id="flashcards-container">
+                <div class="empty-state" id="flashcards-empty">
+                    <div class="empty-icon">📝</div>
+                    <h3>No flashcards yet</h3>
+                    <p>Go to Home and generate some from your notes.</p>
+                </div>
+            </div>
+            
+            <div class="flashcard-controls hidden" id="flashcard-controls">
+                <div class="card-progress">
+                    <span id="card-current">1</span> / <span id="card-total">0</span>
+                </div>
+                <div class="control-buttons">
+                    <button class="btn btn-icon" id="btn-prev-card" onclick="prevCard()">←</button>
+                    <button class="btn btn-secondary" id="btn-hard" onclick="markCard('hard')">Hard</button>
+                    <button class="btn btn-secondary" id="btn-medium" onclick="markCard('medium')">Okay</button>
+                    <button class="btn btn-secondary" id="btn-easy" onclick="markCard('easy')">Easy</button>
+                    <button class="btn btn-icon" id="btn-next-card" onclick="nextCard()">→</button>
+                </div>
+                <button class="btn btn-text" style="margin-top: 1rem;" id="btn-shuffle" onclick="shuffleCards()">Shuffle Cards</button>
+            </div>
+        </section>
+
+        <!-- QUIZ SECTION -->
+        <section class="section" id="section-quiz">
+            <div class="section-header">
+                <h2 class="section-title">Quiz Mode</h2>
+                <p class="section-subtitle">Test your knowledge with AI-generated questions</p>
+            </div>
+            
+            <div class="quiz-container" id="quiz-container">
+                <div class="empty-state" id="quiz-empty">
+                    <div class="empty-icon">🧠</div>
+                    <h3>No quiz yet</h3>
+                    <p>Go to Home and generate a quiz from your notes.</p>
+                </div>
+            </div>
+            
+            <div class="quiz-results hidden" id="quiz-results">
+                <div class="results-card">
+                    <div class="results-score" id="results-score">0%</div>
+                    <h3 id="results-message">Keep studying!</h3>
+                    <div class="results-breakdown" id="results-breakdown"></div>
+                    <button class="btn btn-primary" style="margin-top:2rem;" onclick="retakeQuiz()">Retake Quiz</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUMMARY SECTION -->
+        <section class="section" id="section-summary">
+            <div class="section-header">
+                <h2 class="section-title">Summary</h2>
+                <p class="section-subtitle">Key concepts organized for quick review</p>
+            </div>
+            
+            <div class="summary-container" id="summary-container">
+                <div class="empty-state" id="summary-empty">
+                    <div class="empty-icon">📋</div>
+                    <h3>No summary yet</h3>
+                    <p>Go to Home and generate a summary.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPLAIN SECTION -->
+        <section class="section" id="section-explain">
+            <div class="section-header">
+                <h2 class="section-title">Concept Explainer</h2>
+                <p class="section-subtitle">Stuck on something? Let me explain it simply</p>
+            </div>
+            
+            <div class="explain-container">
+                <div class="explain-input-group">
+                    <input type="text" class="explain-input" id="concept-input" placeholder="Type a concept you're struggling with...">
+                    <button class="btn btn-primary" id="btn-explain" onclick="explainConcept()">Explain It</button>
+                </div>
+                
+                <div class="explanation-result hidden" id="explanation-result">
+                    <div class="explanation-card">
+                        <div class="explanation-section">
+                            <h3>Explanation</h3>
+                            <p id="explain-text"></p>
+                        </div>
+                        <div class="explanation-section">
+                            <h3>Analogy</h3>
+                            <p id="explain-analogy"></p>
+                        </div>
+                        <div class="explanation-section">
+                            <h3>Real-World Example</h3>
+                            <p id="explain-example"></p>
+                        </div>
+                        <div class="explanation-section">
+                            <h3>Study Tip</h3>
+                            <p id="explain-tip"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay hidden" id="loading-overlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p class="loading-text" id="loading-text">Processing...</p>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toast-container"></div>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
